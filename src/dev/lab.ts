@@ -42,8 +42,8 @@ import { Type, JsonL } from '../lib'
 	console.log(Type.stringify(orderType))
 
 	const compressed = JsonL.compress(order, orderType)
-	console.log(JSON.stringify(compressed, null, 2))
+	console.log(JSON.stringify(compressed))
 
 	const decompressed = JsonL.decompress(compressed, orderType)
-	console.log(JSON.stringify(decompressed, null, 2))
+	console.log(JSON.stringify(decompressed))
 })()
