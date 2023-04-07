@@ -31,7 +31,7 @@ module.exports = function (grunt) {
 			test: data.scripts.test
 		}
 		data.main = 'index.js'
-		data.bin = { 'json-light': 'bin/json-light' }
+		data.bin = { jsonl: 'bin/jsonl' }
 		data.types = 'index.d.ts'
 		fs.writeFileSync('dist/package.json', JSON.stringify(data, null, 2), 'utf8')
 	})

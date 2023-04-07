@@ -1,4 +1,4 @@
-import { Type } from '../lib'
+import { Type, JsonL } from '../lib'
 
 (async () => {
 	// const strType = '{name:string,lastname:string,age:number,amount:number,properties:[{name:string,value:any}],address:{type:string,calle:string,nro:number}}'
@@ -40,4 +40,10 @@ import { Type } from '../lib'
 	const orderType = Type.resolve(order)
 	console.log(Type.serialize(orderType))
 	console.log(Type.stringify(orderType))
+
+	const compressed = JsonL.compress(order, orderType)
+	console.log(JSON.stringify(compressed, null, 2))
+
+	const decompressed = JsonL.decompress(compressed, orderType)
+	console.log(JSON.stringify(decompressed, null, 2))
 })()

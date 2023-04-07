@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { h3lp } from 'h3lp'
+import { helper } from './helper'
 
 export enum Kind
 { any = 'any'
@@ -232,16 +232,16 @@ export class Type {
 			} else if (type.kind !== Kind.string && type.kind !== Kind.any) {
 				type.kind = Kind.any
 			}
-			// TODO determinar si es fecha.
 		} else if (typeof value === 'number') {
 			if (type.kind === Kind.undefined) {
 				if (Number.isInteger(value)) {
 					type.kind = Kind.integer
+				} else {
+					type.kind = Kind.decimal
 				}
-				type.kind = Kind.decimal
 			} else if (type.kind === Kind.integer && !Number.isInteger(value)) {
 				type.kind = Kind.decimal
-			} else if (type.kind !== Kind.integer && type.kind !== Kind.number && type.kind !== Kind.any) {
+			} else if (type.kind !== Kind.integer && type.kind !== Kind.decimal && type.kind !== Kind.any) {
 				type.kind = Kind.any
 			}
 		} else if (typeof value === 'boolean') {
@@ -278,7 +278,7 @@ class TypeParser {
 
 	private getType () : Type {
 		const char = this.current
-		if (h3lp.val.isAlphanumeric(char)) {
+		if (helper.isAlphanumeric(char)) {
 			const value: any = this.getValue()
 			if (Type.isPrimitive(value) || value === Kind.any) {
 				return Type.to(value)
@@ -303,13 +303,13 @@ class TypeParser {
 	private getValue (increment = true): string {
 		const buff = []
 		if (increment) {
-			while (!this.end && h3lp.val.isAlphanumeric(this.current)) {
+			while (!this.end && helper.isAlphanumeric(this.current)) {
 				buff.push(this.current)
 				this.index += 1
 			}
 		} else {
 			let index = this.index
-			while (!this.end && h3lp.val.isAlphanumeric(this.buffer[index])) {
+			while (!this.end && helper.isAlphanumeric(this.buffer[index])) {
 				buff.push(this.buffer[index])
 				index += 1
 			}
