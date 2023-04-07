@@ -1,4 +1,4 @@
-import { Type, helper } from '../index'
+import { JsonLight, helper } from '../index'
 module.exports = async (args:any) => {
 	const input = args.input || args.i
 	const output = args.output || args.o
@@ -16,8 +16,7 @@ module.exports = async (args:any) => {
 		data = JSON.parse(str)
 	}
 
-	const type = Type.resolve(data)
-	const schema = Type.stringify(type)
+	const schema = JsonLight.schema(data)
 	if (output) {
 		await helper.write(output, schema)
 	} else {

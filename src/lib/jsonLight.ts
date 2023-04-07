@@ -1,8 +1,18 @@
 /* eslint-disable no-use-before-define */
 import { Type, Kind } from './type'
 
-export class JsonL {
-	public static compress (data:any, type?:Type):any {
+export class JsonLight {
+	public static schema (data:any):string {
+		const type = Type.resolve(data)
+		return Type.stringify(type)
+	}
+
+	public static compress (data:any, schema?:string):any {
+		const type = schema ? Type.parse(schema) : undefined
+		return this._compress(data, type)
+	}
+
+	private static _compress (data:any, type?:Type):any {
 		let result:any
 		const _type = type !== undefined && type.kind !== Kind.any ? type : Type.resolve(data)
 		if (Type.isPrimitive(_type)) {
@@ -17,7 +27,7 @@ export class JsonL {
 					if (Type.isPrimitive(property.type)) {
 						primitives.push(value)
 					} else if (value !== null) {
-						others[property.name] = this.compress(data[property.name], property.type)
+						others[property.name] = this._compress(data[property.name], property.type)
 					}
 				}
 			}
@@ -29,7 +39,7 @@ export class JsonL {
 		} else if (_type.kind === Kind.list && _type.list !== undefined) {
 			const list:any[] = []
 			for (const item of data) {
-				const value = this.compress(item, _type.list.items)
+				const value = this._compress(item, _type.list.items)
 				if (value !== null && value !== undefined) {
 					list.push(value)
 				}
@@ -48,7 +58,12 @@ export class JsonL {
 		return { _type: Type.stringify(type), _data: result }
 	}
 
-	public static decompress (data:any, type?:Type):any {
+	public static decompress (data:any, schema?:string):any {
+		const type = schema ? Type.parse(schema) : undefined
+		return this._decompress(data, type)
+	}
+
+	private static _decompress (data:any, type?:Type):any {
 		let _type
 		let _data
 		let result:any
@@ -73,14 +88,14 @@ export class JsonL {
 						result[property.name] = data._ ? data._[index] : data[index]
 						index = index + 1
 					} else if (_data[property.name] !== null && _data[property.name] !== undefined) {
-						result[property.name] = this.decompress(_data[property.name], property.type)
+						result[property.name] = this._decompress(_data[property.name], property.type)
 					}
 				}
 			}
 		} else if (_type.kind === Kind.list && _type.list !== undefined) {
 			result = []
 			for (const item of data) {
-				const value = this.decompress(item, _type.list.items)
+				const value = this._decompress(item, _type.list.items)
 				result.push(value)
 			}
 		} else {

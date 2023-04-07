@@ -1,11 +1,11 @@
-import { Type, JsonL } from '../lib'
+import { JsonLight } from '../../lib'
 
 (async () => {
 	// const strType = '{name:string,lastname:string,age:number,amount:number,properties:[{name:string,value:any}],address:{type:string,calle:string,nro:number}}'
 	// const parsedType = Type.parse(strType)
 	// console.log(Type.serialize(parsedType))
 
-	const order = {
+	const data = {
 		id: 139,
 		customerId: 'FAMIA',
 		employeeId: 9,
@@ -37,13 +37,12 @@ import { Type, JsonL } from '../lib'
 			}
 		]
 	}
-	const orderType = Type.resolve(order)
-	console.log(Type.serialize(orderType))
-	console.log(Type.stringify(orderType))
+	const schema = JsonLight.schema(data)
+	console.log(schema)
 
-	const compressed = JsonL.compress(order, orderType)
+	const compressed = JsonLight.compress(data, schema)
 	console.log(JSON.stringify(compressed))
 
-	const decompressed = JsonL.decompress(compressed, orderType)
+	const decompressed = JsonLight.decompress(compressed, schema)
 	console.log(JSON.stringify(decompressed))
 })()

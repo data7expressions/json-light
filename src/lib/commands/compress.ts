@@ -1,4 +1,4 @@
-import { JsonL, helper } from '../index'
+import { JsonLight, helper } from '../index'
 module.exports = async (args:any) => {
 	const input = args.input || args.i
 	const schema = args.schema || args.s
@@ -17,7 +17,7 @@ module.exports = async (args:any) => {
 		data = JSON.parse(str)
 	}
 
-	const compressed = JsonL.compress(data, schema)
+	const compressed = JsonLight.compress(data, schema)
 	if (output) {
 		await helper.write(output, compressed)
 	} else {
