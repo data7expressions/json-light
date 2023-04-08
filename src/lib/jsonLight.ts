@@ -53,9 +53,9 @@ export class JsonLight {
 			return result
 		}
 		if (Object.entries(result).length === 1 && result._ !== undefined) {
-			return { _type: Type.stringify(type), _: result._ }
+			return { _schema: Type.stringify(_type), _: result._ }
 		}
-		return { _type: Type.stringify(type), _data: result }
+		return { _schema: Type.stringify(_type), _data: result }
 	}
 
 	public static decompress (data:any, schema?:string):any {
@@ -70,8 +70,8 @@ export class JsonLight {
 		if (type !== undefined && type.kind !== Kind.any) {
 			_type = type
 			_data = data
-		} else if (data._type !== undefined) {
-			_type = Type.parse(data._type)
+		} else if (data._schema !== undefined) {
+			_type = Type.parse(data._schema)
 			_data = data._data
 		} else {
 			throw new Error('cannot resolve type')
@@ -85,7 +85,7 @@ export class JsonLight {
 			for (const property of _type.obj.properties) {
 				if (property.type !== undefined) {
 					if (Type.isPrimitive(property.type)) {
-						result[property.name] = data._ ? data._[index] : data[index]
+						result[property.name] = _data._ ? _data._[index] : _data[index]
 						index = index + 1
 					} else if (_data[property.name] !== null && _data[property.name] !== undefined) {
 						result[property.name] = this._decompress(_data[property.name], property.type)
@@ -94,7 +94,7 @@ export class JsonLight {
 			}
 		} else if (_type.kind === Kind.list && _type.list !== undefined) {
 			result = []
-			for (const item of data) {
+			for (const item of _data) {
 				const value = this._decompress(item, _type.list.items)
 				result.push(value)
 			}

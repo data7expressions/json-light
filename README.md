@@ -189,7 +189,6 @@ Schema:
 
 ```sh
 json-light schema -i source.json
-json-light schema -i countries.json
 ```
 
 Compress:

@@ -18,9 +18,10 @@ module.exports = async (args:any) => {
 	}
 
 	const decompressed = JsonLight.decompress(data, schema)
+	const result = JSON.stringify(decompressed)
 	if (output) {
-		await helper.write(output, decompressed)
+		await helper.write(output, result)
 	} else {
-		console.log(decompressed)
+		console.log(result)
 	}
 }

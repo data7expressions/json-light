@@ -21,6 +21,64 @@
 					"<node_internals>/**"
 				],
 				"program": "${workspaceFolder}/src/dev/labs/country.ts"
+			},
+			{
+				"name": "cli help",
+				"type": "node",
+				"request": "launch",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"program": "${workspaceFolder}/src/lib/cli/json-light.ts",
+				"args": [
+					"help"					
+				]
+			},
+			{
+				"name": "cli schema",
+				"type": "node",
+				"request": "launch",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"program": "${workspaceFolder}/src/lib/cli/json-light.ts",
+				"args": [
+					"schema",
+					"-i",
+					"src/dev/sources/countries.json"			
+				]
+			},
+			{
+				"name": "cli compress",
+				"type": "node",
+				"request": "launch",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"program": "${workspaceFolder}/src/lib/cli/json-light.ts",
+				"args": [
+					"compress",
+					"-i",
+					"src/dev/sources/countries.json",
+					"-o",
+					"src/dev/results/countries.json"			
+				]
+			},
+			{
+				"name": "cli decompress",
+				"type": "node",
+				"request": "launch",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"program": "${workspaceFolder}/src/lib/cli/json-light.ts",
+				"args": [
+					"decompress",
+					"-i",
+					"src/dev/results/countries.json",	
+					"-o",
+					"src/dev/results/countries_original.json"			
+				]
 			}
     ]
 }
