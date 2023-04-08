@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 import { Type, Kind } from './type'
+import { helper } from './helper'
 
 export class JsonLight {
 	public static schema (data:any):string {
@@ -26,6 +27,8 @@ export class JsonLight {
 					const value = data[property.name] !== undefined ? data[property.name] : null
 					if (Type.isPrimitive(property.type)) {
 						primitives.push(value)
+					} else if (property.type.kind === Kind.any) {
+						others[property.name] = data[property.name]
 					} else if (value !== null) {
 						others[property.name] = this._compress(data[property.name], property.type)
 					}
@@ -39,14 +42,23 @@ export class JsonLight {
 		} else if (_type.kind === Kind.list && _type.list !== undefined) {
 			const list:any[] = []
 			for (const item of data) {
-				const value = this._compress(item, _type.list.items)
-				if (value !== null && value !== undefined) {
-					list.push(value)
+				if (Type.isPrimitive(_type.list.items) || _type.list.items.kind === Kind.any) {
+					list.push(item)
+				} else {
+					const value = this._compress(item, _type.list.items)
+					if (value !== null && value !== undefined) {
+						list.push(value)
+					}
 				}
 			}
 			result = list
 		} else {
-			throw new Error(`cannot resolve type for : ${JSON.stringify(data)}`)
+			const input = helper.getJson(data)
+			if (input) {
+				throw new Error(`cannot resolve type ${_type.kind} for : ${JSON.stringify(input)}`)
+			} else {
+				throw new Error(`cannot resolve type ${_type.kind} for : ${data}`)
+			}
 		}
 		// If the type was not passed or it was any, the type must be added in the json
 		if (type !== undefined && type.kind !== Kind.any) {
@@ -85,8 +97,13 @@ export class JsonLight {
 			for (const property of _type.obj.properties) {
 				if (property.type !== undefined) {
 					if (Type.isPrimitive(property.type)) {
-						result[property.name] = _data._ ? _data._[index] : _data[index]
+						const value = _data._ ? _data._[index] : _data[index]
+						if (value !== null) {
+							result[property.name] = value
+						}
 						index = index + 1
+					} else if (property.type.kind === Kind.any && _data[property.name] !== null) {
+						result[property.name] = _data[property.name]
 					} else if (_data[property.name] !== null && _data[property.name] !== undefined) {
 						result[property.name] = this._decompress(_data[property.name], property.type)
 					}
@@ -95,11 +112,20 @@ export class JsonLight {
 		} else if (_type.kind === Kind.list && _type.list !== undefined) {
 			result = []
 			for (const item of _data) {
-				const value = this._decompress(item, _type.list.items)
-				result.push(value)
+				if (Type.isPrimitive(_type.list.items) || _type.list.items.kind === Kind.any) {
+					result.push(item)
+				} else {
+					const value = this._decompress(item, _type.list.items)
+					result.push(value)
+				}
 			}
 		} else {
-			throw new Error(`cannot resolve type for : ${JSON.stringify(data)}`)
+			const input = helper.getJson(_data)
+			if (input) {
+				throw new Error(`cannot resolve type ${_type.kind} for : ${JSON.stringify(input)}`)
+			} else {
+				throw new Error(`cannot resolve type ${_type.kind} for : ${_data}`)
+			}
 		}
 		return result
 	}

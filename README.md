@@ -12,6 +12,7 @@
 - Compress json generating a new valid json
 - Allows to get schema from json data
 - In the event that you do not want to pass the schema to the compress function, it will be generated from the data and stored within the resulting json, allowing it to be later decompressed without the need to pass the schema
+- CLI
 
 ## Methods
 
@@ -201,4 +202,37 @@ Decompress:
 
 ```sh
 json-light decompress -i compressed.json -o original.json -s '{name:string,region:string,phoneCode:string,timezones:[{name:string,offset:integer,pos:{lat:decimal,log:decimal}}]}' 
+```
+
+## CLI examples
+
+these examples are based on the files found in the git repository
+
+### Schema
+
+```sh
+json-light schema -i ./src/dev/sources/countries.json
+json-light schema -i ./src/dev/sources/northwind.json
+```
+
+Output:
+
+```javascript
+[{name:string,iso3:string,iso2:string,numeric_code:string,phone_code:string,capital:string,currency:string,currency_symbol:string,tld:string,native:string,region:string,subregion:string,timezones:[{zoneName:string,gmtOffset:integer,gmtOffsetName:string,abbreviation:string,tzName:string}],translations:{kr:string,br:string,pt:string,nl:string,hr:string,fa:string,de:string,es:string,fr:string,ja:string,it:string,cn:string},latitude:string,longitude:string,emoji:string,emojiU:string,states:[{id:integer,name:string,state_code:string,latitude:string,longitude:string,type:string}]}]
+
+{entities:[{entity:string,rows:[{id:any,name:string,description:string,contact:string,phone:string,address:string,city:string,region:string,postalCode:string,country:string,lastName:string,firstName:string,title:string,titleOfCourtesy:string,birthDate:string,hireDate:string,reportsToId:integer,homepage:string,supplierId:integer,categoryId:integer,quantity:string,price:decimal,inStock:integer,onOrder:integer,reorderLevel:integer,discontinued:boolean,customerId:string,employeeId:integer,orderDate:string,requiredDate:string,shippedDate:string,shipViaId:integer,freight:decimal,details:[{orderId:integer,productId:integer,unitPrice:decimal,quantity:integer,discount:integer}]}]}]}
+```
+
+### Compress
+
+```sh
+json-light compress -i ./src/dev/sources/countries.json -o ./src/dev/results/countries.json
+json-light compress -i ./src/dev/sources/northwind.json -o ./src/dev/results/northwind.json
+```
+
+### Decompress
+
+```sh
+json-light decompress -i ./src/dev/results/countries.json -o ./src/dev/results/countries_original.json
+json-light decompress -i ./src/dev/results/northwind.json -o ./src/dev/results/northwind_original.json
 ```
