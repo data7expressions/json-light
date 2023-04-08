@@ -235,4 +235,23 @@ json-light compress -i ./src/dev/sources/northwind.json -o ./src/dev/results/nor
 ```sh
 json-light decompress -i ./src/dev/results/countries.json -o ./src/dev/results/countries_original.json
 json-light decompress -i ./src/dev/results/northwind.json -o ./src/dev/results/northwind_original.json
+
+
+```
+
+### Results
+
+```sh
+[4.0K]  .
+├── [4.0K]  results
+│   ├── [427K]  countries.json
+│   ├── [712K]  countries_original.json
+│   ├── [ 43M]  customers.json
+│   ├── [ 79M]  customers_original.json
+│   ├── [328K]  northwind.json
+│   └── [464K]  northwind_original.json
+└── [4.0K]  sources
+    ├── [949K]  countries.json
+    ├── [154M]  customers.json
+    └── [893K]  northwind.json
 ```

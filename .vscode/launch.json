@@ -45,7 +45,7 @@
 				"args": [
 					"schema",
 					"-i",
-					"src/dev/sources/northwind.json"			
+					"src/dev/sources/customers.json"			
 				]
 			},
 			{
@@ -59,9 +59,9 @@
 				"args": [
 					"compress",
 					"-i",
-					"src/dev/sources/northwind.json",
+					"src/dev/sources/customers.json",
 					"-o",
-					"src/dev/results/northwind.json"			
+					"src/dev/results/customers.json"			
 				]
 			},
 			{
@@ -75,9 +75,9 @@
 				"args": [
 					"decompress",
 					"-i",
-					"src/dev/results/northwind.json",	
+					"src/dev/results/customers.json",	
 					"-o",
-					"src/dev/results/northwind_original.json"			
+					"src/dev/results/customers_original.json"			
 				]
 			}
     ]
