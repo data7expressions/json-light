@@ -31,7 +31,6 @@
 	},
 	"homepage": "https://github.com/FlavioLionelRita/json-light#readme",
 	"dependencies": {
-		"h3lp": "1.2.8",
 		"minimist": "^1.2.6"
 	},
 	"devDependencies": {
