@@ -1,6 +1,6 @@
 const menus:any = {
 	main: `
-      jsonl [command] <options>
+      json-light [command] <options>
   
       version ............ show package version
       help ............... show help menu for a command
@@ -9,26 +9,27 @@ const menus:any = {
       decompress .............. decompress a compressed json file`,
 
 	schema: `
-      jsonl schema <options>
+      json-light schema <options>
   
       --input, -i ..... input json file path or json data
       --output, -o ..... output file (optional)`,
 
 	compress: `
-      jsonl compress <options>
+      json-light compress <options>
   
       --input, -i ..... input json file path or json data
       --schema, -s ..... schema (optional)
       --output, -o ..... output file (optional)`,
 
 	decompress: `
-      jsonl decompress <options>
+      json-light decompress <options>
   
       --input, -i ..... input compressed json file path or compressed json data
       --schema, -s ..... schema (optional)
       --output, -o ..... output file (optional)`,
+
 	version: `
-      jsonl version`
+      json-light version`
 }
 
 module.exports = (args:any) => {

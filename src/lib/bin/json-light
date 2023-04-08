@@ -10,7 +10,7 @@ case 'help':
 case 'version':
 	require('../commands/version')(args)
 	break
-case 'type':
+case 'schema':
 	require('../commands/schema')(args)
 	break
 case 'compress':
