@@ -4,14 +4,23 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-			"name": "lab",
-			"type": "node",
-			"request": "launch",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/src/dev/lab.ts"
-		}
+      {
+				"name": "order lab",
+				"type": "node",
+				"request": "launch",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"program": "${workspaceFolder}/src/dev/labs/order.ts"
+			},
+			{
+				"name": "country lab",
+				"type": "node",
+				"request": "launch",
+				"skipFiles": [
+					"<node_internals>/**"
+				],
+				"program": "${workspaceFolder}/src/dev/labs/country.ts"
+			}
     ]
 }

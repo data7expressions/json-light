@@ -1,10 +1,6 @@
 import { JsonLight } from '../../lib'
 
 (async () => {
-	// const strType = '{name:string,lastname:string,age:number,amount:number,properties:[{name:string,value:any}],address:{type:string,calle:string,nro:number}}'
-	// const parsedType = Type.parse(strType)
-	// console.log(Type.serialize(parsedType))
-
 	const data = {
 		id: 139,
 		customerId: 'FAMIA',
