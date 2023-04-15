@@ -1,4 +1,5 @@
-import { JsonLight, helper } from '../index'
+import { JsonLight } from '../index'
+import { helper } from '../../application'
 module.exports = async (args:any) => {
 	const input = args.input || args.i
 	const schema = args.schema || args.s

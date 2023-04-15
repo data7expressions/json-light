@@ -1,21 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { helper } from './helper'
-
-export enum Kind
-{ any = 'any'
-, string = 'string'
-, integer = 'integer'
-, decimal = 'decimal'
-, number = 'number'
-, boolean = 'boolean'
-, date = 'date'
-, dateTime = 'dateTime'
-, time = 'time'
-, void = 'void'
-, obj = 'obj'
-, list = 'list'
-, undefined = 'undefined'
-}
+import { Kind } from './kind'
 
 export interface PropertyType {
 	name:string
@@ -28,8 +12,9 @@ export interface ObjType {
 export interface ListType {
 	items:Type
 }
+
 export class Type {
-	// eslint-disable-next-line no-useless-constructor
+// eslint-disable-next-line no-useless-constructor
 	public constructor (public kind:Kind, public obj?: ObjType, public list?:ListType) { }
 
 	public static get any ():Type {
@@ -143,9 +128,9 @@ export class Type {
 		return type.kind === Kind.obj
 	}
 
-	public static parse (value:string): Type {
-		return new TypeParser(value).parse()
-	}
+	// public static parse (value:string): Type {
+	// return new TypeParser(value).parse()
+	// }
 
 	public static stringify (type?: Type): string {
 		if (type === undefined) {
@@ -181,6 +166,10 @@ export class Type {
 			return undefined
 		}
 		return JSON.parse(type) as Type
+	}
+
+	public static parse (schema:string):Type {
+		return new TypeParser(schema).parse()
 	}
 
 	public static resolve (value:any):Type {
@@ -258,10 +247,12 @@ class TypeParser {
 	private buffer: string[]
 	private length: number
 	private index: number
+	private reAlphanumeric:RegExp
 	constructor (source: string) {
 		this.buffer = source.split('')
 		this.length = this.buffer.length
 		this.index = 0
+		this.reAlphanumeric = /[a-zA-Z0-9_.]+$/
 	}
 
 	private get end ():boolean {
@@ -276,9 +267,16 @@ class TypeParser {
 		return this.getType()
 	}
 
+	private isAlphanumeric (value: string): boolean {
+		if (value === null || value === undefined) {
+			return false
+		}
+		return this.reAlphanumeric.test(value)
+	}
+
 	private getType () : Type {
 		const char = this.current
-		if (helper.isAlphanumeric(char)) {
+		if (this.isAlphanumeric(char)) {
 			const value: any = this.getValue()
 			if (Type.isPrimitive(value) || value === Kind.any) {
 				return Type.to(value)
@@ -303,13 +301,13 @@ class TypeParser {
 	private getValue (increment = true): string {
 		const buff = []
 		if (increment) {
-			while (!this.end && helper.isAlphanumeric(this.current)) {
+			while (!this.end && this.isAlphanumeric(this.current)) {
 				buff.push(this.current)
 				this.index += 1
 			}
 		} else {
 			let index = this.index
-			while (!this.end && helper.isAlphanumeric(this.buffer[index])) {
+			while (!this.end && this.isAlphanumeric(this.buffer[index])) {
 				buff.push(this.buffer[index])
 				index += 1
 			}

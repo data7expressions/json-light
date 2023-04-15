@@ -32,7 +32,7 @@ module.exports = function (grunt) {
 		}
 		data.main = 'index.js'
 		data.types = 'index.d.ts'
-		data.bin = { 'json-light': 'cli/json-light.js' }
+		data.bin = { 'json-light': 'infrastructure/cli/json-light.js' }
 		fs.writeFileSync('dist/package.json', JSON.stringify(data, null, 2), 'utf8')
 	})
 	grunt.registerTask('dist', ['clean:dist', 'clean:build', 'exec:tsc', 'exec:lint', 'exec:test', 'copy:lib', 'copy:bin', 'copy:jest', 'copy:readme', 'copy:license', 'create-package'])

@@ -2,18 +2,6 @@ import fs from 'fs'
 import path from 'path'
 
 class Helper {
-	private reAlphanumeric:RegExp
-	constructor () {
-		this.reAlphanumeric = /[a-zA-Z0-9_.]+$/
-	}
-
-	public isAlphanumeric (value: string): boolean {
-		if (value === null || value === undefined) {
-			return false
-		}
-		return this.reAlphanumeric.test(value)
-	}
-
 	public getJson (value: any): any {
 		if (value === null || value === undefined) {
 			return false

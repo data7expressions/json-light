@@ -1,19 +1,19 @@
 /* eslint-disable no-use-before-define */
-import { Type, Kind } from './type'
+import { Type, Kind, IJsonLightService } from '../domain'
 import { helper } from './helper'
 
-export class JsonLight {
-	public static schema (data:any):string {
+export class JsonLightService implements IJsonLightService {
+	public schema (data:any):string {
 		const type = Type.resolve(data)
 		return Type.stringify(type)
 	}
 
-	public static compress (data:any, schema?:string):any {
+	public compress (data:any, schema?:string):any {
 		const type = schema ? Type.parse(schema) : undefined
 		return this._compress(data, type)
 	}
 
-	private static _compress (data:any, type?:Type):any {
+	private _compress (data:any, type?:Type):any {
 		let result:any
 		const _type = type !== undefined && type.kind !== Kind.any ? type : Type.resolve(data)
 		if (Type.isPrimitive(_type)) {
@@ -70,12 +70,12 @@ export class JsonLight {
 		return { _schema: Type.stringify(_type), _data: result }
 	}
 
-	public static decompress (data:any, schema?:string):any {
+	public decompress (data:any, schema?:string):any {
 		const type = schema ? Type.parse(schema) : undefined
 		return this._decompress(data, type)
 	}
 
-	private static _decompress (data:any, type?:Type):any {
+	private _decompress (data:any, type?:Type):any {
 		let _type
 		let _data
 		let result:any
