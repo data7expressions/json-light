@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
-import { Type, Kind, IJsonLightService } from '../domain'
+import { IJsonLightService } from '../domain'
+import { Type, Kind } from 'typ3s'
 import { helper } from './helper'
 
 export class JsonLightService implements IJsonLightService {

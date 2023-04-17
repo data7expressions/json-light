@@ -1,6 +1,6 @@
 {
 	"name": "json-light",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Allow to extend yaml or json files configuration",
 	"scripts": {
 		"lint": "npx eslint src",
@@ -31,6 +31,7 @@
 	},
 	"homepage": "https://github.com/FlavioLionelRita/json-light#readme",
 	"dependencies": {
+		"typ3s": "0.0.2",
 		"minimist": "^1.2.6"
 	},
 	"devDependencies": {
