@@ -31,7 +31,7 @@
 	},
 	"homepage": "https://github.com/FlavioLionelRita/json-light#readme",
 	"dependencies": {
-		"typ3s": "0.0.2",
+		"typ3s": "0.1.0",
 		"minimist": "^1.2.6"
 	},
 	"devDependencies": {

@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import { IJsonLightService } from '../domain'
-import { Type, Kind } from 'typ3s'
+import { Type, Primitive } from 'typ3s'
 import { helper } from './helper'
 
 export class JsonLightService implements IJsonLightService {
@@ -16,11 +16,11 @@ export class JsonLightService implements IJsonLightService {
 
 	private _compress (data:any, type?:Type):any {
 		let result:any
-		const _type = type !== undefined && type.kind !== Kind.any ? type : Type.resolve(data)
+		const _type = type !== undefined && type.primitive !== Primitive.any ? type : Type.resolve(data)
 		if (Type.isPrimitive(_type)) {
 			result = data
 		}
-		if (_type.kind === Kind.obj && _type.obj !== undefined) {
+		if (_type.primitive === Primitive.obj && _type.obj !== undefined) {
 			const primitives:any[] = []
 			const others:any = {}
 			for (const property of _type.obj.properties) {
@@ -28,7 +28,7 @@ export class JsonLightService implements IJsonLightService {
 					const value = data[property.name] !== undefined ? data[property.name] : null
 					if (Type.isPrimitive(property.type)) {
 						primitives.push(value)
-					} else if (property.type.kind === Kind.any) {
+					} else if (property.type.primitive === Primitive.any) {
 						others[property.name] = data[property.name]
 					} else if (value !== null) {
 						others[property.name] = this._compress(data[property.name], property.type)
@@ -40,10 +40,10 @@ export class JsonLightService implements IJsonLightService {
 			} else {
 				result = { ...{ _: primitives }, ...others }
 			}
-		} else if (_type.kind === Kind.list && _type.list !== undefined) {
+		} else if (_type.primitive === Primitive.list && _type.list !== undefined) {
 			const list:any[] = []
 			for (const item of data) {
-				if (Type.isPrimitive(_type.list.items) || _type.list.items.kind === Kind.any) {
+				if (Type.isPrimitive(_type.list.items) || _type.list.items.primitive === Primitive.any) {
 					list.push(item)
 				} else {
 					const value = this._compress(item, _type.list.items)
@@ -56,13 +56,13 @@ export class JsonLightService implements IJsonLightService {
 		} else {
 			const input = helper.getJson(data)
 			if (input) {
-				throw new Error(`cannot resolve type ${_type.kind} for : ${JSON.stringify(input)}`)
+				throw new Error(`cannot resolve type ${_type.primitive} for : ${JSON.stringify(input)}`)
 			} else {
-				throw new Error(`cannot resolve type ${_type.kind} for : ${data}`)
+				throw new Error(`cannot resolve type ${_type.primitive} for : ${data}`)
 			}
 		}
 		// If the type was not passed or it was any, the type must be added in the json
-		if (type !== undefined && type.kind !== Kind.any) {
+		if (type !== undefined && type.primitive !== Primitive.any) {
 			return result
 		}
 		if (Object.entries(result).length === 1 && result._ !== undefined) {
@@ -80,7 +80,7 @@ export class JsonLightService implements IJsonLightService {
 		let _type
 		let _data
 		let result:any
-		if (type !== undefined && type.kind !== Kind.any) {
+		if (type !== undefined && type.primitive !== Primitive.any) {
 			_type = type
 			_data = data
 		} else if (data._schema !== undefined) {
@@ -92,7 +92,7 @@ export class JsonLightService implements IJsonLightService {
 		if (Type.isPrimitive(_type)) {
 			result = data
 		}
-		if (_type.kind === Kind.obj && _type.obj !== undefined) {
+		if (_type.primitive === Primitive.obj && _type.obj !== undefined) {
 			result = {}
 			let index = 0
 			for (const property of _type.obj.properties) {
@@ -103,17 +103,17 @@ export class JsonLightService implements IJsonLightService {
 							result[property.name] = value
 						}
 						index = index + 1
-					} else if (property.type.kind === Kind.any && _data[property.name] !== null) {
+					} else if (property.type.primitive === Primitive.any && _data[property.name] !== null) {
 						result[property.name] = _data[property.name]
 					} else if (_data[property.name] !== null && _data[property.name] !== undefined) {
 						result[property.name] = this._decompress(_data[property.name], property.type)
 					}
 				}
 			}
-		} else if (_type.kind === Kind.list && _type.list !== undefined) {
+		} else if (_type.primitive === Primitive.list && _type.list !== undefined) {
 			result = []
 			for (const item of _data) {
-				if (Type.isPrimitive(_type.list.items) || _type.list.items.kind === Kind.any) {
+				if (Type.isPrimitive(_type.list.items) || _type.list.items.primitive === Primitive.any) {
 					result.push(item)
 				} else {
 					const value = this._decompress(item, _type.list.items)
@@ -123,9 +123,9 @@ export class JsonLightService implements IJsonLightService {
 		} else {
 			const input = helper.getJson(_data)
 			if (input) {
-				throw new Error(`cannot resolve type ${_type.kind} for : ${JSON.stringify(input)}`)
+				throw new Error(`cannot resolve type ${_type.primitive} for : ${JSON.stringify(input)}`)
 			} else {
-				throw new Error(`cannot resolve type ${_type.kind} for : ${_data}`)
+				throw new Error(`cannot resolve type ${_type.primitive} for : ${_data}`)
 			}
 		}
 		return result
