@@ -29,7 +29,7 @@
 				"skipFiles": [
 					"<node_internals>/**"
 				],
-				"program": "${workspaceFolder}/src/lib/cli/json-light.ts",
+				"program": "${workspaceFolder}/src/lib/infrastructure/cli/json-light.ts",
 				"args": [
 					"help"					
 				]
@@ -41,11 +41,11 @@
 				"skipFiles": [
 					"<node_internals>/**"
 				],
-				"program": "${workspaceFolder}/src/lib/cli/json-light.ts",
+				"program": "${workspaceFolder}/src/lib/infrastructure/cli/json-light.ts",
 				"args": [
 					"schema",
 					"-i",
-					"src/dev/sources/customers.json"			
+					"src/dev/sources/northwind.json"			
 				]
 			},
 			{
@@ -55,13 +55,13 @@
 				"skipFiles": [
 					"<node_internals>/**"
 				],
-				"program": "${workspaceFolder}/src/lib/cli/json-light.ts",
+				"program": "${workspaceFolder}/src/lib/infrastructure/cli/json-light.ts",
 				"args": [
 					"compress",
 					"-i",
-					"src/dev/sources/customers.json",
+					"src/dev/sources/northwind.json",
 					"-o",
-					"src/dev/results/customers.json"			
+					"src/dev/results/northwind.json"			
 				]
 			},
 			{
@@ -71,13 +71,13 @@
 				"skipFiles": [
 					"<node_internals>/**"
 				],
-				"program": "${workspaceFolder}/src/lib/cli/json-light.ts",
+				"program": "${workspaceFolder}/src/lib/infrastructure/cli/json-light.ts",
 				"args": [
 					"decompress",
 					"-i",
-					"src/dev/results/customers.json",	
+					"src/dev/results/northwind.json",	
 					"-o",
-					"src/dev/results/customers_original.json"			
+					"src/dev/results/northwind_original.json"			
 				]
 			}
     ]

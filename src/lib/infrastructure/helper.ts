@@ -2,27 +2,27 @@ import fs from 'fs'
 import path from 'path'
 
 class Helper {
-	public getJson (value: any): any {
-		if (value === null || value === undefined) {
-			return false
-		}
-		if (typeof value === 'string') {
-			if (value.indexOf('{') > -1 || value.indexOf('[') > -1) {
-				try {
-					return JSON.parse(value)
-				} catch {
-					return null
-				}
-			} else {
-				return null
-			}
-		}
-		if (typeof value === 'object') {
-			return value
-		} else {
-			return null
-		}
-	}
+// public getJson (value: any): any {
+// if (value === null || value === undefined) {
+// return false
+// }
+// if (typeof value === 'string') {
+// if (value.indexOf('{') > -1 || value.indexOf('[') > -1) {
+// try {
+// return JSON.parse(value)
+// } catch {
+// return null
+// }
+// } else {
+// return null
+// }
+// }
+// if (typeof value === 'object') {
+// return value
+// } else {
+// return null
+// }
+// }
 
 	public async exists (sourcePath:string):Promise<boolean> {
 		const fullPath = this.resolve(sourcePath)

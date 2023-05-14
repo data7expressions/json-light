@@ -1,1 +1,1 @@
-export * from './jsonLight'
+export * from './services'

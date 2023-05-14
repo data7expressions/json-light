@@ -1,2 +1,5 @@
-export * from './jsonLight'
-export * from './helper'
+export * from './services/jsonLightService'
+export * from './useCases/compress'
+export * from './useCases/decompress'
+export * from './useCases/getSchema'
+export * from './facade'

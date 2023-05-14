@@ -1,5 +1,5 @@
 import { JsonLight } from '../index'
-import { helper } from '../../application'
+import { helper } from '../helper'
 module.exports = async (args:any) => {
 	const input = args.input || args.i
 	const output = args.output || args.o
@@ -8,7 +8,7 @@ module.exports = async (args:any) => {
 		return
 	}
 
-	let data = helper.getJson(input)
+	let data = JsonLight.getJson(input)
 	if (data === null) {
 		const str = await helper.read(input)
 		if (str === null) {
