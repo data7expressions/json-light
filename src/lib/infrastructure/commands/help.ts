@@ -19,7 +19,8 @@ const menus:any = {
   
       --input, -i ........ input json file path or json data
       --schema, -s ....... schema (optional)
-      --output, -o ....... output file (optional)`,
+      --output, -o ....... output file (optional)
+      --mapping, -m ....... replace property names with keys`,
 
 	decompress: `
       json-light decompress <options>

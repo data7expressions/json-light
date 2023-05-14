@@ -1,6 +1,6 @@
 {
 	"name": "json-light",
-	"version": "0.5.0",
+	"version": "1.0.0",
 	"description": "Allow to extend yaml or json files configuration",
 	"scripts": {
 		"lint": "npx eslint src",

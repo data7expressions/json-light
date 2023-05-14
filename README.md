@@ -30,6 +30,7 @@ get a compressed json
 - Params:
   - data : json data
   - schema : schema (optional)
+  - mapping : replace names of properties for key and save mapping (optional)
 
 ### .decompress(data:any, schema?:string)
 
@@ -81,7 +82,7 @@ Output:
 Compress:
 
 ```typescript
-const compressed = JsonLight.compress(data, schema)
+const compressed = JsonLight.compress(data, { schema, mapping: true })
 console.log(JSON.stringify(compressed, null, 2))
 ```
 
@@ -89,50 +90,54 @@ Output:
 
 ```javascript
 {
+  "0": [
+    {
+      "1": [
+        40.4165,
+        -3.70256
+      ],
+      "_": [
+        "Madrid",
+        1
+      ]
+    },
+    {
+      "1": [
+        35.8883,
+        -5.3162
+      ],
+      "_": [
+        "Ceuta",
+        1
+      ]
+    },
+    {
+      "1": [
+        28.1248,
+        -15.43
+      ],
+      "_": [
+        "Canary",
+        0
+      ]
+    }
+  ],
   "_": [
     "Spain",
     "Europe",
     "34"
   ],
-  "timezones": [
-    {
-      "_": [
-        "Madrid",
-        1
-      ],
-      "pos": [
-        40.4165,
-        -3.70256
-      ]
-    },
-    {
-      "_": [
-        "Ceuta",
-        1
-      ],
-      "pos": [
-        35.8883,
-        -5.3162
-      ]
-    },
-    {
-      "_": [
-        "Canary",
-        0
-      ],
-      "pos": [
-        28.1248,
-        -15.43
-      ]
-    }
-  ]
+  "__map": {
+    "0": "timezones",
+    "1": "pos"
+  }
 }
 ```
 
 Decompress:
 
 ```typescript
-const decompressed = JsonLight.decompress(compressed, schema)
+const decompressed = JsonLight.decompress(compressed, { schema })
 console.log(JSON.stringify(decompressed, null, 2))
 ```
 
@@ -226,8 +231,8 @@ Output:
 ### Compress
 
 ```sh
-json-light compress -i ./src/dev/sources/countries.json -o ./src/dev/results/countries.json
-json-light compress -i ./src/dev/sources/northwind.json -o ./src/dev/results/northwind.json
+json-light compress -i ./src/dev/sources/countries.json -o ./src/dev/results/countries.json -m
+json-light compress -i ./src/dev/sources/northwind.json -o ./src/dev/results/northwind.json -m
 ```
 
 ### Decompress

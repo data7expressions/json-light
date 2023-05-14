@@ -61,7 +61,8 @@
 					"-i",
 					"src/dev/sources/northwind.json",
 					"-o",
-					"src/dev/results/northwind.json"			
+					"src/dev/results/northwind.json",
+					"-m"			
 				]
 			},
 			{
