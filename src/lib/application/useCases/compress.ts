@@ -1,17 +1,34 @@
 /* eslint-disable no-use-before-define */
-import { Compressor, JsonLightService } from '../../domain'
+import { Compressor, CompressorOptions, JsonLightService } from '../../domain'
 import { Type, Primitive } from 'typ3s'
 
 export class Compress implements Compressor {
 	// eslint-disable-next-line no-useless-constructor
 	constructor (private readonly service:JsonLightService) {}
 
-	public compress (data:any, schema?:string):any {
-		const type = schema ? Type.parse(schema) : undefined
-		return this._compress(data, type)
+	public compress (data:any, options?:CompressorOptions):any {
+		const type = options && options.schema ? Type.parse(options.schema) : undefined
+		const mapping = options && options.mapping ? {} : undefined
+		const result = this._compress(data, type, mapping)
+		result.__map = mapping
+		return result
 	}
 
-	private _compress (data:any, type?:Type):any {
+	private getKey (name:string, mapping:any):string {
+		if (mapping === undefined) {
+			return name
+		}
+		const entry = Object.entries(mapping).find(p => p[1] === name)
+		if (entry !== undefined) {
+			return entry[0]
+		}
+		const keys = Object.keys(mapping).map(p => parseInt(p))
+		const key = (keys.length === 0 ? 0 : Math.max(...keys) + 1).toString()
+		mapping[key] = name
+		return key
+	}
+
+	private _compress (data:any, type?:Type, mapping?:any):any {
 		let result:any
 		const _type = type !== undefined && type.primitive !== Primitive.any ? type : Type.resolve(data)
 		if (Type.isPrimitive(_type)) {
@@ -26,7 +43,7 @@ export class Compress implements Compressor {
 						if (Type.isPrimitive(property.type)) {
 							primitives.push('<N/D>')
 						} else {
-							others[property.name] = '<N/D>'
+							others[this.getKey(property.name, mapping)] = '<N/D>'
 						}
 					} else {
 						// const value = data[property.name] !== undefined ? data[property.name] : null
@@ -34,9 +51,9 @@ export class Compress implements Compressor {
 						if (Type.isPrimitive(property.type)) {
 							primitives.push(value)
 						} else if (property.type.primitive === Primitive.any) {
-							others[property.name] = data[property.name]
+							others[this.getKey(property.name, mapping)] = data[property.name]
 						} else if (value !== null) {
-							others[property.name] = this._compress(data[property.name], property.type)
+							others[this.getKey(property.name, mapping)] = this._compress(data[property.name], property.type, mapping)
 						}
 					}
 				}
@@ -52,7 +69,7 @@ export class Compress implements Compressor {
 				if (Type.isPrimitive(_type.list.items) || _type.list.items.primitive === Primitive.any) {
 					list.push(item)
 				} else {
-					const value = this._compress(item, _type.list.items)
+					const value = this._compress(item, _type.list.items, mapping)
 					if (value !== null && value !== undefined && value !== '<N/D>') {
 						list.push(value)
 					}

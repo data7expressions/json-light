@@ -18,7 +18,7 @@ module.exports = async (args:any) => {
 		data = JSON.parse(str)
 	}
 
-	const compressed = JsonLight.compress(data, schema)
+	const compressed = JsonLight.compress(data, { schema })
 	const result = JSON.stringify(compressed)
 	if (output) {
 		await helper.write(output, result)

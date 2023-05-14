@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { Compressor, Decompressor, JsonLight, JsonLightService, SchemaSolver } from '../domain'
+import { Compressor, CompressorOptions, Decompressor, DecompressorOptions, JsonLight, JsonLightService, SchemaSolver } from '../domain'
 
 export class JsonLightFacade implements JsonLight {
 	// eslint-disable-next-line no-useless-constructor
@@ -12,12 +12,12 @@ export class JsonLightFacade implements JsonLight {
 		return this.schemaSolver.schema(data)
 	}
 
-	public compress (data:any, schema?:string):any {
-		return this.compressor.compress(data, schema)
+	public compress (data:any, options?:CompressorOptions):any {
+		return this.compressor.compress(data, options)
 	}
 
-	public decompress (data:any, schema?:string):any {
-		return this.decompressor.decompress(data, schema)
+	public decompress (data:any, options?:DecompressorOptions):any {
+		return this.decompressor.decompress(data, options)
 	}
 
 	public getJson (value: any): any {
