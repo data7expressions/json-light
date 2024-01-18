@@ -10,7 +10,7 @@ module.exports = async (args:any) => {
 		return
 	}
 
-	let data = JsonLight.getJson(input)
+	let data = JsonLight.json(input)
 	if (data === null) {
 		const str = await helper.read(input)
 		if (str === null) {

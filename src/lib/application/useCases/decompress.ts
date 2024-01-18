@@ -78,7 +78,7 @@ export class Decompress implements Decompressor {
 				}
 			}
 		} else {
-			const input = this.service.getJson(_data)
+			const input = this.service.json(_data)
 			if (input) {
 				throw new Error(`cannot resolve type ${_type.primitive} for : ${JSON.stringify(input)}`)
 			} else {

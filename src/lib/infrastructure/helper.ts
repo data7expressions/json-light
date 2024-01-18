@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 class Helper {
-// public getJson (value: any): any {
+// public json (value: any): any {
 // if (value === null || value === undefined) {
 // return false
 // }

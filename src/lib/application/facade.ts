@@ -20,7 +20,7 @@ export class JsonLightFacade implements JsonLight {
 		return this.decompressor.decompress(data, options)
 	}
 
-	public getJson (value: any): any {
-		return this.service.getJson(value)
+	public json (value: any): any {
+		return this.service.json(value)
 	}
 }

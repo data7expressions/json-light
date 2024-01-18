@@ -1,10 +1,9 @@
-
 export interface TypeSolver {
 	type (data:any):string
 }
 
 export interface JsonLightService {
-	getJson (value: any): any
+	json (value: any): any
 }
 
 export interface CompressorOptions {

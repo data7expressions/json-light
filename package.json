@@ -30,8 +30,8 @@
 	},
 	"homepage": "https://github.com/expr-solver/json-light#readme",
 	"dependencies": {
-		"typ3s": "0.1.6",
-		"minimist": "^1.2.6"
+		"minimist": "^1.2.6",
+		"typ3s": "0.1.7"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.5.11",

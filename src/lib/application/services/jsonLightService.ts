@@ -1,7 +1,7 @@
 import { JsonLightService } from '../../domain'
 
 export class JsonLightServiceImp implements JsonLightService {
-	public getJson (value: any): any {
+	public json (value: any): any {
 		if (value === null || value === undefined) {
 			return false
 		}

@@ -77,7 +77,7 @@ export class Compress implements Compressor {
 			}
 			result = list
 		} else {
-			const input = this.service.getJson(data)
+			const input = this.service.json(data)
 			if (input) {
 				throw new Error(`cannot resolve type ${_type.primitive} for : ${JSON.stringify(input)}`)
 			} else {
