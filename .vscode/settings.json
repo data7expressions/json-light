@@ -1,21 +1,28 @@
 {
     "eslint.format.enable": true,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+      "source.fixAll.eslint": "explicit"
     },
     "editor.tabSize": 2,
     "editor.insertSpaces": false,
     "cSpell.words": [
+      "branchlint",
+      "commitlint",
       "concat",
       "cqrs",
       "ethernet",
       "firstname",
       "Flavio",
       "fullmane",
+      "Gitflow",
+      "github",
+      "Hockenberry",
       "keycloak",
       "lastname",
       "northwind",
+      "npmjs",
       "responsibles",
-      "Responsibles"
+      "Responsibles",
+      "stackoverflow"
     ]
 }

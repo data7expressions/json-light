@@ -4,7 +4,7 @@ import { Type } from 'typ3s'
 
 export class GetSchema implements SchemaSolver {
 	public schema (data:any):string {
-		const type = Type.resolve(data)
+		const type = Type.solve(data)
 		return Type.stringify(type)
 	}
 }
