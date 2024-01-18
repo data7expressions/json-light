@@ -1,6 +1,6 @@
 {
 	"name": "json-light",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Allow to extend yaml or json files configuration",
 	"scripts": {
 		"lint": "npx eslint src",
@@ -31,7 +31,7 @@
 	"homepage": "https://github.com/expr-solver/json-light#readme",
 	"dependencies": {
 		"minimist": "^1.2.6",
-		"typ3s": "0.1.7"
+		"typ3s": "0.1.8"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.5.11",
