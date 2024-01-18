@@ -33,12 +33,12 @@ import { JsonLight } from '../../lib'
 			}
 		]
 	}
-	const schema = JsonLight.schema(data)
-	console.log(schema)
+	const type = JsonLight.type(data)
+	console.log(type)
 
-	const compressed = JsonLight.compress(data, { schema, mapping: true })
+	const compressed = JsonLight.compress(data, { type, mapping: true })
 	console.log(JSON.stringify(compressed))
 
-	const decompressed = JsonLight.decompress(compressed, { schema })
+	const decompressed = JsonLight.decompress(compressed, { type })
 	console.log(JSON.stringify(decompressed))
 })()

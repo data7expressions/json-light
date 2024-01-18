@@ -7,7 +7,7 @@ export class Compress implements Compressor {
 	constructor (private readonly service:JsonLightService) {}
 
 	public compress (data:any, options?:CompressorOptions):any {
-		const type = options && options.schema ? Type.parse(options.schema) : undefined
+		const type = options && options.type ? Type.parse(options.type) : undefined
 		const mapping = options && options.mapping ? {} : undefined
 		const result = this._compress(data, type, mapping)
 		result.__map = mapping

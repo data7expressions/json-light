@@ -7,7 +7,7 @@ export class Decompress implements Decompressor {
 	constructor (private readonly service:JsonLightService) {}
 
 	public decompress (data:any, options?:DecompressorOptions):any {
-		const type = options && options.schema ? Type.parse(options.schema) : undefined
+		const type = options && options.type ? Type.parse(options.type) : undefined
 		const mapping = data.__map ? data.__map : undefined
 		return this._decompress(data, type, mapping)
 	}

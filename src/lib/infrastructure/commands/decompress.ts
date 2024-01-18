@@ -2,7 +2,7 @@ import { JsonLight } from '../index'
 import { helper } from '../helper'
 module.exports = async (args:any) => {
 	const input = args.input || args.i
-	const schema = args.schema || args.s
+	const type = args.type || args.t
 	const output = args.output || args.o
 	if (!input) {
 		console.error('input is required!')
@@ -18,7 +18,7 @@ module.exports = async (args:any) => {
 		data = JSON.parse(str)
 	}
 
-	const decompressed = JsonLight.decompress(data, { schema })
+	const decompressed = JsonLight.decompress(data, { type })
 	const result = JSON.stringify(decompressed)
 	if (output) {
 		await helper.write(output, result)

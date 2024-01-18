@@ -1,15 +1,15 @@
 /* eslint-disable no-use-before-define */
-import { Compressor, CompressorOptions, Decompressor, DecompressorOptions, JsonLight, JsonLightService, SchemaSolver } from '../domain'
+import { Compressor, CompressorOptions, Decompressor, DecompressorOptions, JsonLight, JsonLightService, TypeSolver } from '../domain'
 
 export class JsonLightFacade implements JsonLight {
 	// eslint-disable-next-line no-useless-constructor
-	constructor (private readonly schemaSolver:SchemaSolver,
+	constructor (private readonly typeSolver:TypeSolver,
 		private readonly service:JsonLightService,
 		private readonly compressor:Compressor,
 		private readonly decompressor: Decompressor) {}
 
-	public schema (data:any):string {
-		return this.schemaSolver.schema(data)
+	public type (data:any):string {
+		return this.typeSolver.type(data)
 	}
 
 	public compress (data:any, options?:CompressorOptions):any {

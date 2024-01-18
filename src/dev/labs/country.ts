@@ -11,15 +11,15 @@ import { JsonLight } from '../../lib'
 			{ name: 'Canary', offset: 0, pos: { lat: 28.1248, log: -15.43 } }
 		]
 	}
-	console.log('schema:')
-	const schema = JsonLight.schema(data)
-	console.log(schema)
+	console.log('type:')
+	const type = JsonLight.type(data)
+	console.log(type)
 
 	console.log('compress:')
-	const compressed = JsonLight.compress(data, { schema, mapping: true })
+	const compressed = JsonLight.compress(data, { type, mapping: true })
 	console.log(JSON.stringify(compressed, null, 2))
 
 	console.log('decompressed:')
-	const decompressed = JsonLight.decompress(compressed, { schema })
+	const decompressed = JsonLight.decompress(compressed, { type })
 	console.log(JSON.stringify(decompressed, null, 2))
 })()

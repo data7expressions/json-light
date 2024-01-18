@@ -17,10 +17,10 @@ module.exports = async (args:any) => {
 		data = JSON.parse(str)
 	}
 
-	const schema = JsonLight.schema(data)
+	const type = JsonLight.type(data)
 	if (output) {
-		await helper.write(output, schema)
+		await helper.write(output, type)
 	} else {
-		console.log(schema)
+		console.log(type)
 	}
 }

@@ -1,6 +1,6 @@
 
-export interface SchemaSolver {
-	schema (data:any):string
+export interface TypeSolver {
+	type (data:any):string
 }
 
 export interface JsonLightService {
@@ -8,7 +8,7 @@ export interface JsonLightService {
 }
 
 export interface CompressorOptions {
-	schema?:string
+	type?:string
 	mapping?:boolean
 }
 export interface Compressor {
@@ -16,11 +16,11 @@ export interface Compressor {
 }
 
 export interface DecompressorOptions {
-	schema?:string
+	type?:string
 }
 
 export interface Decompressor {
 	decompress (data:any, options?:DecompressorOptions):any
 }
 
-export interface JsonLight extends SchemaSolver, JsonLightService, Compressor, Decompressor {}
+export interface JsonLight extends TypeSolver, JsonLightService, Compressor, Decompressor {}
