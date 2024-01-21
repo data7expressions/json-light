@@ -30,7 +30,7 @@ export class Compress implements Compressor {
 
 	private _compress (data:any, type?:Type, mapping?:any):any {
 		let result:any
-		const _type = type !== undefined && type.primitive !== Primitive.any ? type : Type.solve(data)
+		const _type = type !== undefined && type.primitive !== Primitive.any ? type : Type.type(data)
 		if (Type.isPrimitive(_type)) {
 			result = data
 		}

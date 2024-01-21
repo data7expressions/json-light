@@ -4,7 +4,7 @@ import { Type } from 'typ3s'
 
 export class GetType implements TypeSolver {
 	public type (data:any):string {
-		const type = Type.solve(data)
+		const type = Type.type(data)
 		return Type.stringify(type)
 	}
 }
