@@ -16,4 +16,4 @@ jemv
 
 #### Defined in
 
-[infrastructure/index.ts:2](https://github.com/FlavioLionelRita/json-light/blob/eca214e/src/lib/infrastructure/index.ts#L2)
+[infrastructure/index.ts:2](https://github.com/data7expressions/json-light/blob/2d6bf7a/src/lib/infrastructure/index.ts#L2)
