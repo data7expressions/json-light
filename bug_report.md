@@ -2,7 +2,7 @@
 name: Bug report
 ---
 (**NOTE**: This is used to report product bugs:
-  To report a security vulnerability, please visit [issues](https://github.com/expr-solver/json-light/issues)
+  To report a security vulnerability, please visit [issues](https://github.com/data7expressions/json-light/issues)
  
 **Bug description**
 
