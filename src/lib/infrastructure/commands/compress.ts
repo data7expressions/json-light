@@ -1,5 +1,5 @@
 import { JsonLight } from '../index'
-import { helper } from '../helper'
+import { jsonLightHelp } from '../helper'
 module.exports = async (args:any) => {
 	const input = args.input || args.i
 	const type = args.type || args.t
@@ -12,7 +12,7 @@ module.exports = async (args:any) => {
 
 	let data = JsonLight.json(input)
 	if (data === null) {
-		const str = await helper.read(input)
+		const str = await jsonLightHelp.fs.read(input)
 		if (str === null) {
 			throw new Error(`File ${input} not found`)
 		}
@@ -22,7 +22,7 @@ module.exports = async (args:any) => {
 	const compressed = JsonLight.compress(data, { type, mapping })
 	const result = JSON.stringify(compressed)
 	if (output) {
-		await helper.write(output, result)
+		await jsonLightHelp.fs.write(output, result)
 	} else {
 		console.log(result)
 	}
