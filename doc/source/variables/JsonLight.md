@@ -10,4 +10,4 @@
 
 ## Source
 
-[infrastructure/index.ts:2](https://github.com/data7expressions/json-light/blob/604c186f5c235fc303e38c644478df05cfa01358/src/lib/infrastructure/index.ts#L2)
+[infrastructure/index.ts:2](https://github.com/data7expressions/json-light/blob/8ae737ae8603c901208d4e7df002301820537909/src/lib/infrastructure/index.ts#L2)
