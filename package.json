@@ -1,6 +1,6 @@
 {
 	"name": "json-light",
-	"version": "1.0.6",
+	"version": "1.0.8",
 	"description": "Allow to extend yaml or json files configuration",
 	"scripts": {
 		"lint": "npx eslint src",
@@ -31,7 +31,7 @@
 	"homepage": "https://github.com/data7expressions/json-light#readme",
 	"dependencies": {
 		"minimist": "^1.2.6",
-		"typ3s": "0.1.17"
+		"typ3s": "1.0.3"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.5.11",
@@ -56,7 +56,7 @@
 		"ts-jest": "^29.1.0",
 		"ts-node": "^10.9.1",
 		"typedoc": "^0.25.4",
-		"typedoc-plugin-markdown": "3.17.1",
+		"typedoc-plugin-markdown": "4.0.0",
 		"typescript": "5.4.5"
 	}
 }
